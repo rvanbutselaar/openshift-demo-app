@@ -11,16 +11,11 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b"OK")
         elif self.path == "/cpuleak":
-            self.send_response(200)
-            self.end_headers()
-            self.wfile.write(b"OK")
-
             while True:
                 with open('small_file.txt', 'r') as f:
                     for line in f:
                         giant_string = ''
                         giant_string+=line
-
         elif self.path == "/memoryleak":
             giant_string = ''
             while True:
