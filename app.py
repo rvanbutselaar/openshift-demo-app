@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 import os
-from http.server import BaseHTTPRequestHandler, HTTPServer
+import threading
+import http.server
+
+from http.server import HTTPServer, SimpleHTTPRequestHandler, BaseHTTPRequestHandler
 
 
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
@@ -28,5 +31,6 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             self.wfile.write("Hello {} \n".format(os.environ.get('NAME', 'world!')).encode('utf-8'))
 
 if __name__ == '__main__':
-    httpd = HTTPServer(('', 8080), SimpleHTTPRequestHandler)
-    httpd.serve_forever()
+    server = http.server.ThreadingHTTPServer(('', 8080), SimpleHTTPRequestHandler)
+    thread = threading.Thread(target = server.serve_forever)
+    thread.start()
