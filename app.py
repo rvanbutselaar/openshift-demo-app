@@ -7,7 +7,7 @@ from prometheus_client import start_http_server, Info
 from http.server import HTTPServer, SimpleHTTPRequestHandler, BaseHTTPRequestHandler
 
 i = Info('build_version', 'Version info')
-i.info({'version': '1.0', 'maintainer': 'ronald.van.butselaar@trivento.nl'})
+i.info({'version': '1.0.2', 'maintainer': 'ronald.van.butselaar@trivento.nl'})
 
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
