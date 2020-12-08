@@ -2,9 +2,12 @@
 import os
 import threading
 import http.server
+from prometheus_client import start_http_server, Info
 
 from http.server import HTTPServer, SimpleHTTPRequestHandler, BaseHTTPRequestHandler
 
+i = Info('build_version', 'Version info')
+i.info({'version': '1.0', 'maintainer': 'ronald.van.butselaar@trivento.nl'})
 
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
@@ -31,6 +34,8 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             self.wfile.write("Hello {} \n".format(os.environ.get('NAME', 'world!')).encode('utf-8'))
 
 if __name__ == '__main__':
+    start_http_server(8000)
+
     server = http.server.ThreadingHTTPServer(('', 8080), SimpleHTTPRequestHandler)
     thread = threading.Thread(target = server.serve_forever)
     thread.start()
