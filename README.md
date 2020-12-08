@@ -135,3 +135,16 @@ Standaard draait er maar een Pod, waardoor je applicatie tijdelijk onbereikbaar 
 Draai daarom je DeploymentConfig in productie altijd met minimaal 2 replica's om dit te voorkomen.
 
 Ga naar de DeploymentConfig en klik op Actions -> Edit Pod Count.
+
+## Monitoring
+
+Als je applicatie een Prometheus metrics endpoint heeft kan custom metrics laten monitoren door Prometheus. Om die vervolgens te gebruiken in Grafana of alerts.
+
+Open de DeploymentConfig en ga naar YAML. Voeg onderstaande yaml toe onder `spec.template.metadata`.
+
+```yaml
+      annotations:
+        prometheus.io/path: /
+        prometheus.io/port: '8000'
+        prometheus.io/scrape: 'true'
+```
