@@ -31,7 +31,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         else:
             self.send_response(200)
             self.end_headers()
-            self.wfile.write("Hello {} \n".format(os.environ.get('NAME', 'world!')).encode('utf-8'))
+            self.wfile.write("Hello {} \n".format(os.environ.get('NAME', 'Trivento!')).encode('utf-8'))
 
 if __name__ == '__main__':
     start_http_server(8000)
